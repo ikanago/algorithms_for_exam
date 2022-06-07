@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    - name: Configure CMake
+      run: cmake -B ${{github.workspace}}/build
+
+    - name: Check format
+      run: cmake --build build --target format
+
+    - name: Build
+      run: make -C ${{github.workspace}}/build -j
+
+    - name: Test
+      run: cmake --build build --target test
