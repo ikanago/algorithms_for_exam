@@ -3,6 +3,7 @@ set(CMAKE_C_STANDARD 11)
 
 set(LIB_SRC
     heap.c
+    util.c
 )
 
 add_library(algos STATIC ${LIB_SRC})

@@ -1,25 +1,20 @@
 #include "heap.h"
+
 #include <limits.h>
 
-static size_t _parent_index(const size_t i) {
-    return (i - 1) / 2;
-}
+static size_t _parent_index(const size_t i) { return (i - 1) / 2; }
 
-static size_t _left_child_index(const size_t i) {
-    return 2 * i + 1;
-}
+static size_t _left_child_index(const size_t i) { return 2 * i + 1; }
 
-static size_t _right_child_index(const size_t i) {
-    return 2 * i + 2;
-}
+static size_t _right_child_index(const size_t i) { return 2 * i + 2; }
 
-struct heap_t* new_heap(size_t size) {
-    struct heap_t* heap = (struct heap_t*)malloc(sizeof(struct heap_t));
+struct heap_t *new_heap(size_t size) {
+    struct heap_t *heap = (struct heap_t *)malloc(sizeof(struct heap_t));
     if (heap == NULL) {
         return NULL;
     }
 
-    int* buffer = (int*)calloc(size, sizeof(int));
+    int *buffer = (int *)calloc(size, sizeof(int));
     if (buffer == NULL) {
         return NULL;
     }
@@ -30,7 +25,7 @@ struct heap_t* new_heap(size_t size) {
     return heap;
 }
 
-void heap_insert(struct heap_t* heap, const int data) {
+void heap_insert(struct heap_t *heap, const int data) {
     if (heap->tail == heap->size) {
         return;
     }
@@ -50,14 +45,14 @@ void heap_insert(struct heap_t* heap, const int data) {
     }
 }
 
-int heap_min(const struct heap_t* heap) {
+int heap_min(const struct heap_t *heap) {
     if (heap->tail == 0) {
         return INT_MIN;
     }
     return heap->buffer[0];
 }
 
-void heap_delete(struct heap_t* heap) {
+void heap_delete(struct heap_t *heap) {
     if (heap->tail == 0) {
         return;
     }
@@ -96,4 +91,3 @@ void heap_delete(struct heap_t* heap) {
         }
     }
 }
-
