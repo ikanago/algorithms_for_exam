@@ -4,6 +4,7 @@ add_executable(
     test_algos
     EXCLUDE_FROM_ALL
     test_heap.cc
+    test_sort.cc
 )
 target_compile_features(test_algos PUBLIC cxx_std_17)
 
