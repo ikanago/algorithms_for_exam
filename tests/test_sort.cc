@@ -1,4 +1,6 @@
 #include <gtest/gtest.h>
+
+#include <climits>
 #include <random>
 
 extern "C" {
@@ -6,7 +8,7 @@ extern "C" {
 #include "util.h"
 }
 
-class RandomSortTest: public testing::Test {
+class RandomSortTest : public testing::Test {
     std::random_device _seed_gen;
     std::default_random_engine _engine;
     std::uniform_int_distribution<int> _dist;
@@ -15,7 +17,7 @@ public:
     static constexpr size_t length = 1000;
     int array[length];
 
-    RandomSortTest(): _seed_gen(std::random_device()) {
+    RandomSortTest() : _seed_gen(std::random_device()) {
         this->_engine = std::default_random_engine(this->_seed_gen());
         this->_dist = std::uniform_int_distribution<int>(-INT_MIN, INT_MAX);
     }
