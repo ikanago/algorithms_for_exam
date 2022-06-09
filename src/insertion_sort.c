@@ -1,4 +1,5 @@
 #include "insertion_sort.h"
+
 #include <stddef.h>
 
 // 最良計算量は O(n)，最悪/平均計算量は O(n^2)
@@ -17,4 +18,3 @@ void insertion_sort(int *array, const size_t length) {
         array[j] = target;
     }
 }
-

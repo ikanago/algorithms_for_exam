@@ -6,4 +6,3 @@
 void insertion_sort(int *array, const size_t length);
 
 #endif
-
