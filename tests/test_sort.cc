@@ -5,6 +5,7 @@
 
 extern "C" {
 #include "bubble_sort.h"
+#include "insertion_sort.h"
 #include "util.h"
 }
 
@@ -39,5 +40,18 @@ TEST(SortTest, BubbleSort) {
 TEST_F(RandomSortTest, BubbleSort) {
     ASSERT_FALSE(is_sorted(array, length));
     bubble_sort(array, length);
+    ASSERT_TRUE(is_sorted(array, length));
+}
+
+TEST(SortTest, InsertionSort) {
+    const size_t length = 10;
+    int array[length] = {14, 5, 3, 23, 27, 3, 15, 22, 9, 2};
+    insertion_sort(array, length);
+    ASSERT_TRUE(is_sorted(array, length));
+}
+
+TEST_F(RandomSortTest, InsertionSort) {
+    ASSERT_FALSE(is_sorted(array, length));
+    insertion_sort(array, length);
     ASSERT_TRUE(is_sorted(array, length));
 }

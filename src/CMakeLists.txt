@@ -4,6 +4,7 @@ set(CMAKE_C_STANDARD 11)
 set(LIB_SRC
     bubble_sort.c
     heap.c
+    insertion_sort.c
     util.c
 )
 
