@@ -33,12 +33,17 @@ struct chaining_set_t *new_chaining_set(
 
     set->buckets = buckets;
     set->bucket_size = bucket_size;
+    set->current_size = 0;
     set->hash_func = hash_func;
     return set;
 }
 
+size_t size_chaining_set(const struct chaining_set_t *set) {
+    return set->current_size;
+}
+
 static int exists_chaining_set_by_hash(
-    struct chaining_set_t *set, const int value, const int hash) {
+    const struct chaining_set_t *set, const int value, const int hash) {
     if (search_linked_list(set->buckets[hash], value) != NULL) {
         return 1;
     } else {
@@ -46,7 +51,7 @@ static int exists_chaining_set_by_hash(
     }
 }
 
-int exists_chaining_set(struct chaining_set_t *set, const int value) {
+int exists_chaining_set(const struct chaining_set_t *set, const int value) {
     const size_t bucket = set->hash_func(value, set->bucket_size);
     return exists_chaining_set_by_hash(set, value, bucket);
 }
@@ -55,20 +60,14 @@ void insert_chaining_set(struct chaining_set_t *set, const int value) {
     const size_t bucket = set->hash_func(value, set->bucket_size);
     if (!exists_chaining_set_by_hash(set, value, bucket)) {
         prepend_linked_list(set->buckets[bucket], value);
+        set->current_size++;
     }
 }
 
-void delete_chaininng_set(struct chaining_set_t *set, const int value);
-
-#include <stdio.h>
-void print_chaining_set(struct chaining_set_t *set) {
-    for (size_t b = 0; b < set->bucket_size; b++) {
-        struct linked_list_t *list = set->buckets[b];
-        printf("%lu: ", b);
-        for (struct linked_list_cell_t *cell = list->head; cell != NULL;
-             cell = cell->next) {
-            printf("%d, ", cell->value);
-        }
-        puts("");
+void delete_chaining_set(struct chaining_set_t *set, const int value) {
+    const size_t bucket = set->hash_func(value, set->bucket_size);
+    if (exists_chaining_set_by_hash(set, value, bucket)) {
+        delete_linked_list(set->buckets[bucket], value);
+        set->current_size--;
     }
 }
