@@ -18,4 +18,3 @@ TEST(ChainingSetInitTest, Insert) {
         ASSERT_TRUE(exists_chaining_set(set, array[i]));
     }
 }
-

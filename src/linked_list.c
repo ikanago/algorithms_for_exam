@@ -33,6 +33,24 @@ void prepend_linked_list(struct linked_list_t *list, const int value) {
     list->head = cell;
 }
 
+void delete_linked_list(struct linked_list_t *list, const int value) {
+    struct linked_list_cell_t *prev = NULL;
+    struct linked_list_cell_t *target = list->head;
+    while (target != NULL) {
+        if (target->value == value) {
+            if (target == list->head) {
+                list->head = target->next;
+            } else {
+                prev->next = target->next;
+            }
+            free(target);
+            return;
+        }
+        prev = target;
+        target = target->next;
+    }
+}
+
 void delete_front_linked_list(struct linked_list_t *list) {
     if (list->head == NULL) {
         return;

@@ -1,5 +1,6 @@
-#include "linked_list.h"
 #include <stddef.h>
+
+#include "linked_list.h"
 
 #ifndef _CHAINING_SET_H
 #define _CHAINING_SET_H
@@ -14,7 +15,8 @@ struct chaining_set_t {
     hash_func_t hash_func;
 };
 
-struct chaining_set_t *new_chaining_set(const size_t bucket_size, const hash_func_t hash);
+struct chaining_set_t *new_chaining_set(
+    const size_t bucket_size, const hash_func_t hash);
 
 int exists_chaining_set(struct chaining_set_t *set, const int value);
 
@@ -25,4 +27,3 @@ void delete_chaining_set(struct chaining_set_t *set, const int value);
 void print_chaining_set(struct chaining_set_t *set);
 
 #endif
-

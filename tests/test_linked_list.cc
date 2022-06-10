@@ -49,7 +49,7 @@ TEST_F(LinkedListTest, MatchFirst) {
     ASSERT_EQ(cell->next->value, 4);
 }
 
-TEST_F(LinkedListTest, NotFound) {
+TEST_F(LinkedListTest, SearchNotFound) {
     struct linked_list_cell_t* cell = search_linked_list(this->list, 42);
     ASSERT_EQ(cell, nullptr);
 }
@@ -57,6 +57,39 @@ TEST_F(LinkedListTest, NotFound) {
 TEST_F(LinkedListTest, DeleteHead) {
     delete_front_linked_list(this->list);
     const int expected[5] = {5, 1, 4, 1, 3};
+    size_t i = 0;
+    for (struct linked_list_cell_t* cell = list->head; cell != NULL;
+         cell = cell->next) {
+        ASSERT_EQ(cell->value, expected[i]);
+        i++;
+    }
+}
+
+TEST_F(LinkedListTest, DeleteHeadByValue) {
+    delete_linked_list(this->list, 9);
+    const int expected[5] = {5, 1, 4, 1, 3};
+    size_t i = 0;
+    for (struct linked_list_cell_t* cell = list->head; cell != NULL;
+         cell = cell->next) {
+        ASSERT_EQ(cell->value, expected[i]);
+        i++;
+    }
+}
+
+TEST_F(LinkedListTest, DeleteByValue) {
+    delete_linked_list(this->list, 1);
+    const int expected[5] = {9, 5, 4, 1, 3};
+    size_t i = 0;
+    for (struct linked_list_cell_t* cell = list->head; cell != NULL;
+         cell = cell->next) {
+        ASSERT_EQ(cell->value, expected[i]);
+        i++;
+    }
+}
+
+TEST_F(LinkedListTest, DeleteNotFound) {
+    delete_linked_list(this->list, 42);
+    const int expected[6] = {9, 5, 1, 4, 1, 3};
     size_t i = 0;
     for (struct linked_list_cell_t* cell = list->head; cell != NULL;
          cell = cell->next) {
