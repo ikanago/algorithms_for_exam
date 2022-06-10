@@ -5,6 +5,7 @@ set(LIB_SRC
     bubble_sort.c
     heap.c
     insertion_sort.c
+    merge_sort.c
     quick_sort.c
     util.c
 )

@@ -6,6 +6,7 @@
 extern "C" {
 #include "bubble_sort.h"
 #include "insertion_sort.h"
+#include "merge_sort.h"
 #include "quick_sort.h"
 #include "util.h"
 }
@@ -44,6 +45,19 @@ TEST_F(RandomSortTest, BubbleSort) {
     ASSERT_TRUE(is_sorted(array, length));
 }
 
+TEST(SortTest, InsertionSort) {
+    const size_t length = 10;
+    int array[length] = {14, 5, 3, 23, 27, 3, 15, 22, 9, 2};
+    insertion_sort(array, length);
+    ASSERT_TRUE(is_sorted(array, length));
+}
+
+TEST_F(RandomSortTest, InsertionSort) {
+    ASSERT_FALSE(is_sorted(array, length));
+    insertion_sort(array, length);
+    ASSERT_TRUE(is_sorted(array, length));
+}
+
 TEST(SortTest, QuickSort) {
     const size_t length = 10;
     int array[length] = {14, 5, 3, 23, 27, 3, 15, 22, 9, 2};
@@ -57,15 +71,15 @@ TEST_F(RandomSortTest, QuickSort) {
     ASSERT_TRUE(is_sorted(array, length));
 }
 
-TEST(SortTest, InsertionSort) {
+TEST(SortTest, MergeSort) {
     const size_t length = 10;
     int array[length] = {14, 5, 3, 23, 27, 3, 15, 22, 9, 2};
-    insertion_sort(array, length);
+    merge_sort(array, length);
     ASSERT_TRUE(is_sorted(array, length));
 }
 
-TEST_F(RandomSortTest, InsertionSort) {
+TEST_F(RandomSortTest, MergeSort) {
     ASSERT_FALSE(is_sorted(array, length));
-    insertion_sort(array, length);
+    merge_sort(array, length);
     ASSERT_TRUE(is_sorted(array, length));
 }

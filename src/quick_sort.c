@@ -56,7 +56,8 @@ static void quick_sort_inner(int *array, const int left, const int right) {
 }
 
 // 平均計算量は O(n log n)．
-// 最悪計算量は O(n^2) で，これはピボットがソート範囲の最大値あるいは最小値を取り続けた場合のものである．
+// 最悪計算量は O(n^2)
+// で，これはピボットがソート範囲の最大値あるいは最小値を取り続けた場合のものである．
 // この実装では，ソート済みの配列に対して実行した場合がこれにあたる．
 void quick_sort(int *array, const size_t length) {
     quick_sort_inner(array, 0, length - 1);
