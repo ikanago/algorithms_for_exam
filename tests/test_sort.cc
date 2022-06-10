@@ -41,7 +41,7 @@ TEST(SortTest, BubbleSort) {
 
 TEST_F(RandomSortTest, BubbleSort) {
     ASSERT_FALSE(is_sorted(array, length));
-    bubble_sort(array, length);
+    bubble_sort(this->array, length);
     ASSERT_TRUE(is_sorted(array, length));
 }
 
@@ -54,7 +54,7 @@ TEST(SortTest, InsertionSort) {
 
 TEST_F(RandomSortTest, InsertionSort) {
     ASSERT_FALSE(is_sorted(array, length));
-    insertion_sort(array, length);
+    insertion_sort(this->array, length);
     ASSERT_TRUE(is_sorted(array, length));
 }
 
@@ -67,7 +67,7 @@ TEST(SortTest, QuickSort) {
 
 TEST_F(RandomSortTest, QuickSort) {
     ASSERT_FALSE(is_sorted(array, length));
-    quick_sort(array, length);
+    quick_sort(this->array, length);
     ASSERT_TRUE(is_sorted(array, length));
 }
 
@@ -80,6 +80,6 @@ TEST(SortTest, MergeSort) {
 
 TEST_F(RandomSortTest, MergeSort) {
     ASSERT_FALSE(is_sorted(array, length));
-    merge_sort(array, length);
+    merge_sort(this->array, length);
     ASSERT_TRUE(is_sorted(array, length));
 }
