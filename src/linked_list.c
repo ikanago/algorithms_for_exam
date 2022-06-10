@@ -1,7 +1,8 @@
 #include "linked_list.h"
 
 static struct linked_list_cell_t *new_cell(const int value) {
-    struct linked_list_cell_t *cell = (struct linked_list_cell_t *)malloc(sizeof(struct linked_list_cell_t));
+    struct linked_list_cell_t *cell =
+        (struct linked_list_cell_t *)malloc(sizeof(struct linked_list_cell_t));
     if (cell == NULL) {
         return NULL;
     }
@@ -30,6 +31,16 @@ void prepend_linked_list(struct linked_list_t *list, const int value) {
 
     cell->next = list->head;
     list->head = cell;
+}
+
+void delete_front_linked_list(struct linked_list_t *list) {
+    if (list->head == NULL) {
+        return;
+    }
+
+    struct linked_list_cell_t *head = list->head;
+    list->head = head->next;
+    free(head);
 }
 
 struct linked_list_cell_t *search_linked_list(
