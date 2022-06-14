@@ -8,6 +8,10 @@ size_t mod_hash_func(const int value, const size_t bucket_size) {
     return value % bucket_size;
 }
 
+// チェイニング法(外部ハッシュ法，オープンハッシュ法)．
+// 同じハッシュ値を持つデータを連結リストに格納する．
+// 保持する連結リストの個数を B とすると，挿入，探索，削除の平均計算量は O(n /
+// B) となり， B が十分に大きいときは O(1) とみなせる．
 struct chaining_set_t *new_chaining_set(
     const size_t bucket_size, const hash_func_t hash_func) {
     struct linked_list_t **buckets = (struct linked_list_t **)calloc(

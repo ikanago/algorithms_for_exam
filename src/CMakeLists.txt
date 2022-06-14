@@ -8,6 +8,7 @@ set(LIB_SRC
     insertion_sort.c
     linked_list.c
     merge_sort.c
+    queue.c
     quick_sort.c
     util.c
 )

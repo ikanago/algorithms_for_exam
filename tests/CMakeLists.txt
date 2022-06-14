@@ -6,6 +6,7 @@ add_executable(
     test_chaining_set.cc
     test_heap.cc
     test_linked_list.cc
+    test_queue.cc
     test_sort.cc
 )
 target_compile_features(test_algos PUBLIC cxx_std_17)

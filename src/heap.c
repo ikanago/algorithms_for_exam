@@ -9,13 +9,14 @@ static size_t _left_child_index(const size_t i) { return 2 * i + 1; }
 static size_t _right_child_index(const size_t i) { return 2 * i + 2; }
 
 struct heap_t *new_heap(size_t size) {
-    struct heap_t *heap = (struct heap_t *)malloc(sizeof(struct heap_t));
-    if (heap == NULL) {
+    int *buffer = (int *)calloc(size, sizeof(int));
+    if (buffer == NULL) {
         return NULL;
     }
 
-    int *buffer = (int *)calloc(size, sizeof(int));
-    if (buffer == NULL) {
+    struct heap_t *heap = (struct heap_t *)malloc(sizeof(struct heap_t));
+    if (heap == NULL) {
+        free(buffer);
         return NULL;
     }
 
