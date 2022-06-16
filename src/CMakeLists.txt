@@ -10,6 +10,7 @@ set(LIB_SRC
     merge_sort.c
     queue.c
     quick_sort.c
+    union_find_tree.c
     util.c
 )
 

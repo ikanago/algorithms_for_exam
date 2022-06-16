@@ -8,6 +8,7 @@ add_executable(
     test_linked_list.cc
     test_queue.cc
     test_sort.cc
+    test_union_find_tree.cc
 )
 target_compile_features(test_algos PUBLIC cxx_std_17)
 
