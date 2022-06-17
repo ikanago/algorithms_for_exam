@@ -32,34 +32,50 @@ TEST(UnionFindTreeTest, InitializedSeparatedGroup) {
     }
 }
 
-#include <iostream>
 TEST(UnionFindTreeTest, RandomMerge) {
-    constexpr size_t size = 1000;
+    constexpr size_t size = 300;
     struct uf_tree_t *tree = new_uf_tree(size);
 
-    auto merged_pair = std::vector<std::pair<size_t, size_t>>();
+    auto is_merged = std::vector(size, std::vector(size, false));
     for (size_t i = 0; i < size; i++) {
         // Every element belongs to the same group with itself.
-        merged_pair.push_back({i, i});
+        is_merged[i][i] = true;
     }
 
     auto seed_gen = std::random_device();
     auto engine = std::default_random_engine(seed_gen());
     auto element_dist = std::uniform_int_distribution<size_t>(0, size - 1);
 
-    constexpr size_t num_merges = 100000;
+    constexpr size_t num_merges = 10000;
     for (size_t i = 0; i < num_merges; i++) {
         const auto x = element_dist(engine);
         const auto y = element_dist(engine);
-        merged_pair.push_back({x, y});
         merge_uf_tree(tree, x, y);
+
+        is_merged[x][y] = true;
+        is_merged[y][x] = true;
+        for (size_t k = 0; k < size; k++) {
+            if (k == x || k == y) {
+                // Already marked as true.
+                continue;
+            }
+
+            if (is_merged[x][k]) {
+                // x and k is in the same group, so do y and k.
+                is_merged[y][k] = true;
+                is_merged[k][y] = true;
+            }
+            if (is_merged[y][k]) {
+                is_merged[x][k] = true;
+                is_merged[k][x] = true;
+            }
+        }
     }
 
-    for (const auto &pair : merged_pair) {
-        const auto [x, y] = pair;
-        // Only tests merged elements are in the same group.
-        // But there should be elements in the same group that is not merged
-        // directly.
-        ASSERT_TRUE(same_uf_tree(tree, x, y));
+    for (size_t x = 0; x < size; x++) {
+        for (size_t y = 0; y < size; y++) {
+            ASSERT_EQ(
+                static_cast<bool>(same_uf_tree(tree, x, y)), is_merged[x][y]);
+        }
     }
 }

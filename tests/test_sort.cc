@@ -22,7 +22,7 @@ public:
 
     RandomSortTest() : _seed_gen(std::random_device()) {
         this->_engine = std::default_random_engine(this->_seed_gen());
-        this->_dist = std::uniform_int_distribution<int>(-INT_MIN, INT_MAX);
+        this->_dist = std::uniform_int_distribution<int>(INT_MIN, INT_MAX);
     }
 
     void SetUp() override {
