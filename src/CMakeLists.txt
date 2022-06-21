@@ -3,6 +3,7 @@ set(CMAKE_C_STANDARD 11)
 
 set(LIB_SRC
     bubble_sort.c
+    bucket_sort.c
     chaining_set.c
     heap.c
     insertion_sort.c
