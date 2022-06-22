@@ -9,6 +9,7 @@ set(LIB_SRC
     insertion_sort.c
     linked_list.c
     merge_sort.c
+    open_address_set.c
     queue.c
     quick_sort.c
     union_find_tree.c

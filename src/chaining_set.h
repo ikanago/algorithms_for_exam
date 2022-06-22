@@ -7,7 +7,7 @@
 
 typedef size_t (*hash_func_t)(int, size_t);
 
-size_t mod_hash_func(const int value, const size_t bucket_size);
+size_t mod_hash_func_chaining(const int value, const size_t bucket_size);
 
 struct chaining_set_t {
     struct linked_list_t **buckets;

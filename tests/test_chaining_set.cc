@@ -5,7 +5,7 @@ extern "C" {
 }
 
 TEST(ChainingSetInitTest, Insert) {
-    struct chaining_set_t *set = new_chaining_set(10, mod_hash_func);
+    struct chaining_set_t *set = new_chaining_set(10, mod_hash_func_chaining);
     ASSERT_NE(set, nullptr);
 
     const size_t n = 7;
@@ -22,7 +22,7 @@ TEST(ChainingSetInitTest, Insert) {
 }
 
 TEST(ChainingSetInitTest, Delete) {
-    struct chaining_set_t *set = new_chaining_set(10, mod_hash_func);
+    struct chaining_set_t *set = new_chaining_set(10, mod_hash_func_chaining);
     ASSERT_NE(set, nullptr);
 
     const size_t n = 7;

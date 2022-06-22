@@ -6,6 +6,7 @@ add_executable(
     test_chaining_set.cc
     test_heap.cc
     test_linked_list.cc
+    test_open_address_set.cc
     test_queue.cc
     test_sort.cc
     test_union_find_tree.cc
