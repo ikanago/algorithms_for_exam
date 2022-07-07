@@ -6,6 +6,7 @@
 extern "C" {
 #include "bubble_sort.h"
 #include "bucket_sort.h"
+#include "heap_sort.h"
 #include "insertion_sort.h"
 #include "merge_sort.h"
 #include "quick_sort.h"
@@ -77,6 +78,19 @@ TEST(SortTest, InsertionSort) {
 TEST_F(RandomSortTest, InsertionSort) {
     ASSERT_FALSE(is_sorted(array, length));
     insertion_sort(array, length);
+    ASSERT_TRUE(is_sorted(array, length));
+}
+
+TEST(SortTest, HeapSort) {
+    const size_t length = 10;
+    int array[length] = {14, 5, 3, 23, 27, 3, 15, 22, 9, 2};
+    heap_sort(array, length);
+    ASSERT_TRUE(is_sorted(array, length));
+}
+
+TEST_F(RandomSortTest, HeapSort) {
+    ASSERT_FALSE(is_sorted(array, length));
+    heap_sort(array, length);
     ASSERT_TRUE(is_sorted(array, length));
 }
 

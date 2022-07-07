@@ -6,6 +6,7 @@ set(LIB_SRC
     bucket_sort.c
     chaining_set.c
     heap.c
+    heap_sort.c
     insertion_sort.c
     linked_list.c
     merge_sort.c

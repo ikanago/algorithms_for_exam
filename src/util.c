@@ -1,5 +1,7 @@
 #include "util.h"
 
+#include <stdio.h>
+
 void swap(int *a, int *b) {
     if (*a == *b) {
         return;
@@ -30,4 +32,11 @@ int is_sorted(const int *array, const size_t length) {
         }
     }
     return 1;
+}
+
+void print_array(const int *array, const size_t length) {
+    for (size_t i = 0; i < length; i++) {
+        printf("%d, ", array[i]);
+    }
+    puts("");
 }
