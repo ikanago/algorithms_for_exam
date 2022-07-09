@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.0)
 add_executable(
     test_algos
     EXCLUDE_FROM_ALL
+    test_binary_tree.cc
     test_chaining_set.cc
     test_heap.cc
     test_linked_list.cc

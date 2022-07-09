@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.0)
 set(CMAKE_C_STANDARD 11)
 
 set(LIB_SRC
+    binary_tree.c
     bubble_sort.c
     bucket_sort.c
     chaining_set.c
