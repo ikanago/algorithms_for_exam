@@ -23,13 +23,13 @@ public:
     int array[length];
 
     RandomSortTest() : _seed_gen(std::random_device()) {
-        _engine = std::default_random_engine(_seed_gen());
-        _dist = std::uniform_int_distribution<int>(INT_MIN, INT_MAX);
+        this->_engine = std::default_random_engine(this->_seed_gen());
+        this->_dist = std::uniform_int_distribution<int>(INT_MIN, INT_MAX);
     }
 
     void SetUp() override {
         for (size_t i = 0; i < length; i++) {
-            array[i] = _dist(_engine);
+            this->array[i] = this->_dist(this->_engine);
         }
     }
 };

@@ -39,6 +39,21 @@ void insert_binary_tree(struct binary_tree_t *tree, const int value) {
     }
 }
 
+int search_binary_tree(struct binary_tree_t *tree, const int value) {
+    struct binary_tree_t *current = tree;
+    while (current != NULL) {
+        if (current->value == value) {
+            return 1;
+        }
+        if (value < current->value) {
+            current = current->lhs;
+        } else {
+            current = current->rhs;
+        }
+    }
+    return 0;
+}
+
 void traverse_preorder(struct binary_tree_t *tree, traverse_handler_t handler) {
     if (tree == NULL) {
         return;

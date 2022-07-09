@@ -1,23 +1,42 @@
 #include <gtest/gtest.h>
 #include <stddef.h>
 
+#include <climits>
+#include <random>
+
 extern "C" {
 #include "binary_tree.h"
 #include "quick_sort.h"
 #include "util.h"
 }
 
-#include <iostream>
+class RandomBinaryTreeTest : public testing::Test {
+    std::random_device _seed_gen;
+    std::default_random_engine _engine;
+    std::uniform_int_distribution<int> _dist;
+
+public:
+    static constexpr size_t length = 1000;
+    int array[length];
+
+    RandomBinaryTreeTest() : _seed_gen(std::random_device()) {
+        this->_engine = std::default_random_engine(this->_seed_gen());
+        this->_dist = std::uniform_int_distribution<int>(INT_MIN, INT_MAX);
+    }
+
+    void SetUp() override {
+        for (size_t i = 0; i < length; i++) {
+            this->array[i] = this->_dist(this->_engine);
+        }
+    }
+};
+
 void assert_keeps_order(struct binary_tree_t *tree) {
-    std::cout << tree->value << " lhs: " << tree->lhs << " rhs: " << tree->rhs
-              << std::endl;
     if (tree->lhs != NULL) {
-        std::cout << "lhs: " << tree->lhs->value << std::endl;
         const int is_lhs_ok = tree->lhs->value <= tree->value;
         ASSERT_TRUE(is_lhs_ok);
     }
     if (tree->rhs != NULL) {
-        std::cout << "rhs: " << tree->rhs->value << std::endl;
         const int is_rhs_ok = tree->value < tree->rhs->value;
         ASSERT_TRUE(is_rhs_ok);
     }
@@ -63,4 +82,28 @@ TEST(BinaryTreeTest, SortedByInorder) {
     quick_sort(data, length);
     size_t has_checked = 0;
     ASSERT_TRUE(is_sorted_traverse_inorder(tree, data, &has_checked));
+}
+
+TEST_F(RandomBinaryTreeTest, SortedByInorder) {
+    struct binary_tree_t *tree = new_binary_tree(this->array[0]);
+
+    for (size_t i = 1; i < this->length; i++) {
+        insert_binary_tree(tree, this->array[i]);
+    }
+
+    quick_sort(this->array, this->length);
+    size_t has_checked = 0;
+    ASSERT_TRUE(is_sorted_traverse_inorder(tree, this->array, &has_checked));
+}
+
+TEST_F(RandomBinaryTreeTest, InsertedItemExists) {
+    struct binary_tree_t *tree = new_binary_tree(this->array[0]);
+
+    for (size_t i = 1; i < this->length; i++) {
+        insert_binary_tree(tree, this->array[i]);
+    }
+
+    for (size_t i = 0; i < this->length; i++) {
+        ASSERT_TRUE(search_binary_tree(tree, this->array[i]));
+    }
 }
