@@ -5,7 +5,7 @@
 
 #include "queue.h"
 
-const static size_t BUCKET_SIZE = 10;
+static const size_t BUCKET_SIZE = 10;
 
 static struct queue_t **new_buckets(const size_t bucket_size) {
     struct queue_t **buckets =

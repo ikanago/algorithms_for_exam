@@ -21,8 +21,7 @@ struct chaining_set_t *new_chaining_set(
     }
 
     for (size_t i = 0; i < bucket_size; i++) {
-        struct linked_list_t *bucket =
-            (struct linked_list_t *)malloc(sizeof(struct linked_list_t));
+        struct linked_list_t *bucket = new_linked_list();
         if (bucket == NULL) {
             return NULL;
         }
