@@ -1,11 +1,13 @@
 # Algorithms for Exam
 
+[![CI](https://github.com/ikanago/algorithms_for_exam/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/ikanago/algorithms_for_exam/actions/workflows/ci.yml)
+
 院試に出てきそうなアルゴリズムとデータ構造を C 言語で実装しました．
 
 ## Requirements
-gcc
-g++
-make
+gcc  
+g++  
+make  
 cmake >= 3.0
 
 ## Set up

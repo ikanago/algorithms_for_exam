@@ -107,3 +107,42 @@ TEST_F(RandomBinaryTreeTest, InsertedItemExists) {
         ASSERT_TRUE(search_binary_tree(tree, this->array[i]));
     }
 }
+
+TEST(BinaryTreeTest, RemoveLeaf) {
+    const size_t length = 10;
+    int data[length] = {2, 5, -4, 0, 7, 8, -5, 7, -4, 1};
+    struct binary_tree_t *tree = new_binary_tree(data[0]);
+
+    for (size_t i = 1; i < length; i++) {
+        insert_binary_tree(tree, data[i]);
+    }
+    remove_binary_tree(tree, 1);
+
+    traverse_preorder(tree, assert_keeps_order);
+}
+
+TEST(BinaryTreeTest, RemoveRoot) {
+    const size_t length = 10;
+    int data[length] = {2, 5, -4, 0, 7, 8, -5, 7, -4, 1};
+    struct binary_tree_t *tree = new_binary_tree(data[0]);
+
+    for (size_t i = 1; i < length; i++) {
+        insert_binary_tree(tree, data[i]);
+    }
+    remove_binary_tree(tree, 2);
+
+    traverse_preorder(tree, assert_keeps_order);
+}
+
+TEST(BinaryTreeTest, RemoveMiddleNode) {
+    const size_t length = 10;
+    int data[length] = {2, 5, -4, 0, 7, 8, -5, 7, -4, 1};
+    struct binary_tree_t *tree = new_binary_tree(data[0]);
+
+    for (size_t i = 1; i < length; i++) {
+        insert_binary_tree(tree, data[i]);
+    }
+    remove_binary_tree(tree, 5);
+
+    traverse_preorder(tree, assert_keeps_order);
+}
