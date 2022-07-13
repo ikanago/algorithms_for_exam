@@ -59,12 +59,6 @@ int search_binary_tree(const struct binary_tree_t *tree, const int value) {
     return 0;
 }
 
-enum direction_t {
-    LEFT,
-    RIGHT,
-    NONE,
-};
-
 static int is_leaf(const struct binary_tree_t *node) {
     return node->lhs == NULL && node->rhs == NULL;
 }
@@ -72,6 +66,12 @@ static int is_leaf(const struct binary_tree_t *node) {
 static int has_two_children(const struct binary_tree_t *node) {
     return node->lhs != NULL && node->rhs != NULL;
 }
+
+enum direction_t {
+    LEFT,
+    RIGHT,
+    NONE,
+};
 
 // `tree` において，高々1つの子をもつ `node` を削除する．
 // `parent` は `node` の親へのポインタである．
@@ -173,4 +173,27 @@ void traverse_preorder(struct binary_tree_t *tree, traverse_handler_t handler) {
     handler(tree);
     traverse_preorder(tree->lhs, handler);
     traverse_preorder(tree->rhs, handler);
+}
+
+// 通りがけ順で再帰的に `handler()` を各ノードに対して実行する．
+void traverse_inorder(struct binary_tree_t *tree, traverse_handler_t handler) {
+    if (tree == NULL) {
+        return;
+    }
+
+    traverse_preorder(tree->lhs, handler);
+    handler(tree);
+    traverse_preorder(tree->rhs, handler);
+}
+
+// 帰りがけ順で再帰的に `handler()` を各ノードに対して実行する．
+void traverse_postorder(
+    struct binary_tree_t *tree, traverse_handler_t handler) {
+    if (tree == NULL) {
+        return;
+    }
+
+    traverse_preorder(tree->lhs, handler);
+    traverse_preorder(tree->rhs, handler);
+    handler(tree);
 }

@@ -21,4 +21,8 @@ void print_binary_tree(const struct binary_tree_t *tree);
 
 void traverse_preorder(struct binary_tree_t *tree, traverse_handler_t handler);
 
+void traverse_inorder(struct binary_tree_t *tree, traverse_handler_t handler);
+
+void traverse_postorder(struct binary_tree_t *tree, traverse_handler_t handler);
+
 #endif
