@@ -116,7 +116,7 @@ TEST(BinaryTreeTest, RemoveLeaf) {
     for (size_t i = 1; i < length; i++) {
         insert_binary_tree(tree, data[i]);
     }
-    remove_binary_tree(tree, 1);
+    tree = remove_binary_tree(tree, 1);
 
     traverse_preorder(tree, assert_keeps_order);
 }
@@ -129,7 +129,7 @@ TEST(BinaryTreeTest, RemoveRoot) {
     for (size_t i = 1; i < length; i++) {
         insert_binary_tree(tree, data[i]);
     }
-    remove_binary_tree(tree, 2);
+    tree = remove_binary_tree(tree, 2);
 
     traverse_preorder(tree, assert_keeps_order);
 }
@@ -142,7 +142,16 @@ TEST(BinaryTreeTest, RemoveMiddleNode) {
     for (size_t i = 1; i < length; i++) {
         insert_binary_tree(tree, data[i]);
     }
-    remove_binary_tree(tree, 5);
+    tree = remove_binary_tree(tree, 5);
 
     traverse_preorder(tree, assert_keeps_order);
+}
+
+TEST(BinaryTreeTest, RemoveRootOnlyTree) {
+    const size_t length = 10;
+    int data[length] = {2};
+    struct binary_tree_t *tree = new_binary_tree(data[0]);
+
+    tree = remove_binary_tree(tree, 2);
+    ASSERT_EQ(tree, nullptr);
 }

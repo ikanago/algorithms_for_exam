@@ -15,7 +15,8 @@ void insert_binary_tree(struct binary_tree_t *tree, const int value);
 
 int search_binary_tree(const struct binary_tree_t *tree, const int value);
 
-void remove_binary_tree(struct binary_tree_t *tree, const int value);
+struct binary_tree_t *remove_binary_tree(
+    struct binary_tree_t *tree, const int value);
 
 void print_binary_tree(const struct binary_tree_t *tree);
 

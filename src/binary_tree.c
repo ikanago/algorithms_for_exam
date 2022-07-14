@@ -16,6 +16,8 @@ struct binary_tree_t *new_binary_tree(const int value) {
     return root;
 }
 
+// 平均時間計算量は O(log n)．
+// 最悪時間計算量は，これまでにデータが昇順または降順に挿入されていた場合で，O(n)．
 void insert_binary_tree(struct binary_tree_t *tree, const int value) {
     if (tree == NULL) {
         tree = new_binary_tree(value);
@@ -75,7 +77,7 @@ enum direction_t {
 
 // `tree` において，高々1つの子をもつ `node` を削除する．
 // `parent` は `node` の親へのポインタである．
-static void remove_node_with_0_or_1_child(struct binary_tree_t *tree,
+static void remove_node_with_0_or_1_child(struct binary_tree_t **tree,
     struct binary_tree_t *node, struct binary_tree_t *parent,
     enum direction_t direction) {
     if (has_two_children(node)) {
@@ -94,7 +96,7 @@ static void remove_node_with_0_or_1_child(struct binary_tree_t *tree,
     }
 
     if (parent == NULL) {
-        tree = filling;
+        *tree = filling;
     } else {
         if (direction == LEFT) {
             parent->lhs = filling;
@@ -107,7 +109,12 @@ static void remove_node_with_0_or_1_child(struct binary_tree_t *tree,
     return;
 }
 
-void remove_binary_tree(struct binary_tree_t *tree, const int value) {
+// `tree` から `value` を値としてもつノードを探索し，削除する．
+// 処理後の二分探索木の根のポインタを返す．
+// 平均時間計算量は O(log n)．
+// 最悪時間計算量は O(n)．
+struct binary_tree_t *remove_binary_tree(
+    struct binary_tree_t *tree, const int value) {
     struct binary_tree_t *parent = NULL;
     struct binary_tree_t *node = tree;
     // `node` が `parent` の左右どちらの子であるかを指定する．
@@ -127,8 +134,8 @@ void remove_binary_tree(struct binary_tree_t *tree, const int value) {
 
         // 以下は削除すべきノードを発見した場合の処理である．
         if (!has_two_children(node)) {
-            remove_node_with_0_or_1_child(tree, node, parent, direction);
-            return;
+            remove_node_with_0_or_1_child(&tree, node, parent, direction);
+            return tree;
         }
 
         // 削除すべきノードが子を2つもつときは，右部分木からその中で最小値をもつノードを探索し，削除するノードの位置に移動する．
@@ -144,9 +151,10 @@ void remove_binary_tree(struct binary_tree_t *tree, const int value) {
         // `rhs_minimum` が指すノードは削除するため，`rhs_minimum` がもつ値を
         // `node` に移動するだけでよい．
         node->value = rhs_minimum->value;
-        remove_node_with_0_or_1_child(tree, rhs_minimum, parent, direction);
-        return;
+        remove_node_with_0_or_1_child(&tree, rhs_minimum, parent, direction);
+        break;
     }
+    return tree;
 }
 
 static void print_binary_tree_inner(
